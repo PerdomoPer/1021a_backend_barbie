@@ -18,5 +18,25 @@ describe('Cadastro Filme', () => {
         
         expect(resposta.status).toBe(201)
         expect(resposta.data).toEqual(filme)
-    })
+    }),
+    it('Deve listar um filme cadastrado', async () => {
+      const filme = {
+          titulo: 'Vingadores',
+          descricao: 'Filme dos Vingadores',
+          foto: 'https://live.staticflickr.com/7270/6976087418_59719341f5_b.jpg',
+      }
+      const resposta = 
+          await axios.post('http://localhost:3000/filmes', filme)
+
+
+      const listaFilmes = await axios.get('http://localhost:3000/filmes')
+
+      const filmeCadastrado = listaFilmes.data
+      
+      expect(filmeCadastrado[0]).toEqual(filme)
+  
+      expect(filmeCadastrado.length).toBe(1)
+
+  })
 })
+

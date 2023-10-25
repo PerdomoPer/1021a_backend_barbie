@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "dev": "tsx src/index.ts -w",
-    "test": "vitest"
+    "dev": "tsx watch src/index.ts -w",
+    "test": "vitest -w"
   },
   "author": "Gustavo Perdomo",
   "license": "ISC",
