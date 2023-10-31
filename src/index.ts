@@ -4,10 +4,14 @@ import express from 'express';
 const app = express();
 
 // Define uma rota padrão
-app.get('/', (req, res) => {
-    res.send('Olá, mundo!');
+app.get('/filmes', (req, res) => {
+    const filme = {
+        titulo: 'Vingadores',
+        descricao: 'Filme dos Vingadores',
+        foto: 'https://live.staticflickr.com/7270/6976087418_59719341f5_b.jpg',
+    }
+    res.send([filme]) ;
 });
-
 app.post('/filmes', (req,res)=>{
     const filme = {
         titulo: 'Vingadores',
