@@ -1,15 +1,14 @@
 import BancoEmMemoria from "../infra/banco/banco-em-memoria"
+
 class SalvaFilme{
     private banco = new BancoEmMemoria()
     constructor(){}
-    public execute (input:Input): Output|undefined{
-        const {id, titulo, descricao, foto} = input
-
-        const resultado = this.banco.salvar({id, titulo, descricao, foto})
+    public execute(input:Input):Output | undefined{
+        const{id,titulo,descricao,foto} = input
+        const resultado = this.banco.salvar({id,titulo,descricao,foto})
         if(!resultado) return undefined
-        return {id, titulo, descricao, foto}
-    }
-}
+        return {id,titulo,descricao,foto}
+    }}
 
 export default SalvaFilme
 
@@ -19,6 +18,7 @@ type Input = {
     descricao:string,
     foto:string
 }
+
 type Output = {
     id:number,
     titulo:string,
