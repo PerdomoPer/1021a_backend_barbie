@@ -1,6 +1,7 @@
 import express, {Request} from 'express';
 import BancoMongoDB from './infra/banco/banco-mongodb';
 import ListarFilme from './aplicacao/listar-filme.use-case'
+import SalvarFilme from './aplicacao/salva-filme.use-case'
 
 const bancoMongoDB = new BancoMongoDB();
 const app = express();
@@ -16,7 +17,7 @@ app.get('/filmes', async (req, res) => {
    res.send(filmes).status(200)
 })
 
-app.post('/filmes', (req:Request, res) => {
+app.post('/filmes', async (req:Request, res) => {
     const {id, titulo, descricao, foto} = req.body
     const filme:Filme = {
         id,
@@ -24,8 +25,10 @@ app.post('/filmes', (req:Request, res) => {
         descricao,
         foto,
     }
+    const salvarFilme = new SalvarFilme(bancoMongoDB)
+    const filmes = await salvarFilme.execute(filme)
     filmes_repositorio.push(filme)
-    res.status(201).send(filme)
+    res.status(201).send(filmes)
 });
 
 app.delete('/filmes/:id', (req, res) => {
